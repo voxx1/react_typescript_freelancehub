@@ -1,0 +1,10 @@
+.MuiBadge-colorPrimary {
+  background-color: teal !important;
+}
+
+@media (max-width: 380px) {
+  .app {
+      width: 380px;
+      margin: 0 auto;
+  }
+}
