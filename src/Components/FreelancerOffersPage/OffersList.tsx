@@ -75,7 +75,7 @@ align-items: center;
 ${mobile({ alignItems: "flex-start" })}
 `;
 const OffersDescription = styled.p`
-width: 700px;
+width: 701px;
 margin-top: 0px;
 ${tablet({ width: "100%" })}
 
