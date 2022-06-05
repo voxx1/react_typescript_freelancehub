@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { mobile, tablet } from "../../Assets/responsive"
 import left from "../../Assets/HomePageFiles/use-left.png"
 import right from "../../Assets/HomePageFiles/use-right.png"
+import { Link } from "react-router-dom";
 
 
 
@@ -96,7 +97,9 @@ const TypeChoice = () => {
             <ItemListItem>Wait for the customer to pay the pro forma and receive a VAT invoice.</ItemListItem>
             <ItemListItem>Receive your salary even within an hour of the customer's payment.</ItemListItem>
           </ItemList>
-          <Button>Check available orders</Button>
+          <Link to="/freelancer">
+            <Button>Check available orders</Button>
+          </Link>
         </Item>
         <Item>
           <Image src={right} />

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { mobile, tablet } from '../../Assets/responsive';
 import { DUMMY_OFFERS, DUMMY_CATEGORIES } from "../../Assets/DUMMY_DATA"
 import headerImage from "../../Assets/HomePageFiles/header.png"
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import OffersItem from "./OffersItem"
 
 
 const Container = styled.div`
@@ -45,41 +45,6 @@ margin-right: 10px;
 const OffersContainer = styled.div`
 
 `;
-const OffersItem = styled.div`
-display: flex;
-align-items: flex-start;
-flex-direction: column;
-padding-left: 140px;
-${tablet({ paddingLeft: "0px" })}
-`;
-
-const OffersUpper = styled.div`
-display: flex;
-justify-content: space-between;
-width: 100%;
-`;
-const OffersContent = styled.div`
-
-`;
-const OffersFooter = styled.div`
-
-`;
-const OffersTitle = styled.h4`
-margin-top: 5px;
-`;
-const OffersDate = styled.h4`
-margin-top: 5px;
-color: rgb(114, 177, 88);
-display: flex;
-align-items: center;
-${mobile({ alignItems: "flex-start" })}
-`;
-const OffersDescription = styled.p`
-width: 701px;
-margin-top: 0px;
-${tablet({ width: "100%" })}
-
-`;
 const HeaderContainer = styled.div`
 display: flex;
 justify-content: space-around;
@@ -109,8 +74,8 @@ const Image = styled.img`
 height: auto;
 width: 190px;
 ${mobile({ display: "none" })}
-
 `;
+
 
 
 const OffersList = () => {
@@ -130,24 +95,16 @@ const OffersList = () => {
         <CategoryContainer>
           <CategoryMainTitle>Categories</CategoryMainTitle>
           {DUMMY_CATEGORIES.map(item =>
-            <CategoryItem>
+            <CategoryItem key={item.name}>
               <CategoryLogo src={item.url} /><CategoryTitle>{item.name}</CategoryTitle>
             </CategoryItem>)}
         </CategoryContainer>
         <OffersContainer>
           {DUMMY_OFFERS.map(item =>
-            <OffersItem>
-              <OffersUpper>
-                <OffersTitle>{item.title}</OffersTitle>
-                <OffersDate><CalendarMonthIcon />{item.date}</OffersDate>
-              </OffersUpper>
-              <OffersContent>
-                <OffersDescription>{item.description}</OffersDescription>
-              </OffersContent>
-              <OffersFooter>
-
-              </OffersFooter>
-            </OffersItem>)}
+            <OffersItem key={item.id} deadline={item.deadline} title={item.title} description={item.description} date={item.date} id={item.id} price={item.price} category={{
+              name: item.category.name,
+              iconURL: item.category.url
+            }} />)}
         </OffersContainer>
 
       </BodyContainer>

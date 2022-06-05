@@ -1,13 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
-import { mobile } from '../../Assets/responsive';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { mobile, tablet } from '../../Assets/responsive';
+import ArrowCircleDownIcon from '@mui/icons-material/ArrowCircleDown';
+import ArrowCircleUpIcon from '@mui/icons-material/ArrowCircleUp';
+import HandshakeOutlinedIcon from '@mui/icons-material/HandshakeOutlined';
 
 
 
 interface Props {
     title: string,
     description: string,
+    deadline: string,
     date: string,
     price: number,
     id: number,
@@ -17,67 +21,143 @@ interface Props {
     }
 }
 
+interface ButtonProps {
+    contact: boolean;
+}
+
+
 const OfferItemContainer = styled.div`
 display: flex;
+align-items: flex-start;
 flex-direction: column;
-width: 700px; 
-`
-const JobTitleContainer = styled.div`
+padding: 30px 0px 30px 125px;
+${tablet({ paddingLeft: "0px" })}
+`;
+
+const OffersUpper = styled.div`
 display: flex;
-align-items: start;
 justify-content: space-between;
-${mobile({ justifyContent: "center" })}
-`
-const JobTitle = styled.h2`
-margin-top: 0px;
-font-size: 23px;
-color: #303458;
-`
-const JobDate = styled.h2`
+width: 100%;
+`;
+const OffersContent = styled.div`
+
+`;
+const OffersFooter = styled.div`
+display: flex;
+width: 100%;
+justify-content: space-between;
+`;
+const OffersTitle = styled.h4`
+margin-top: 5px;
+`;
+const OffersDate = styled.h4`
+margin-top: 5px;
 color: rgb(114, 177, 88);
-margin-top: 3px;
-font-size: 14px;
-font-weight: 600;
-margin-left: 50px;
-`
-const JobContent = styled.div`
-`
-const JobDescription = styled.p`
-font-size: 15px;
-font-weight: 400;
-margin-top: 0px;
-`
-const JobFooter = styled.div`
 display: flex;
 align-items: center;
-`
-const JobCategory = styled.h2`
-font-weight: 500;
+padding-left: 15px;
+${mobile({ alignItems: "flex-start" })}
+`;
+const OffersCategory = styled.h4`
+margin-top: 5px;
 font-size: 17px;
-`
-
-const JobCategoryIcon = styled.img`
-height: 30px;
-width: 30px;
+display: flex;
+align-items: center;
+${mobile({ fontSize: "14px" })}
+`;
+const OffersCategoryLogo = styled.img`
+height: 25px;
+width: 25px;
 margin-right: 10px;
+`;
+const OffersDescription = styled.p`
+width: 701px;
+margin-top: 0px;
+${tablet({ width: "100%" })}
+`;
+const OffersDeadline = styled.h4`
+color: rgb(48, 106, 207);
+font-size: 17px;
+font-weight: bold;
+`
+const OffersPrice = styled.h4`
+color: rgb(48, 106, 207);
+font-size: 17px;
+font-weight: bold;
+`
+const OffersBox = styled.div`
+display: flex;
+width: 100%;
+justify-content: space-between;
+`
+const Button = styled.button`
+  padding: 8px 12px 8px 12px;
+  font-size: 12px;
+  background: ${(props: ButtonProps) => (props.contact ? "rgb(48, 106, 207)" : "#72B158")};
+  border-radius: 10px;
+  border: 2px solid white;
+  cursor: pointer;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: ${(props: ButtonProps) => (props.contact ? "underline rgb(48, 106, 207)" : "underline #72B158")};
+  &:hover {
+    color: ${(props: ButtonProps) => (props.contact ? "rgb(48, 106, 207)" : "#72B158")};
+    background: white;
+    border: ${(props: ButtonProps) => (props.contact ? "2px solid rgb(48, 106, 207)" : "2px solid #72B158")};
+  }
+`;
+
+const InfoButtons = styled.div`
+display: flex;
+${mobile({ flexDirection: "column" })}
 `
 
-const OffersItem: React.FC<Props> = ({ title, description, date, price, id, category }) => {
+
+const OffersItem: React.FC<Props> = ({ title, description, date, price, deadline, id, category }) => {
+
+    const [showMore, setShowMore] = useState<boolean>(false)
+
+    const showMoreHandler = (event: React.MouseEvent<HTMLElement>) => {
+        setShowMore(!showMore)
+        console.log(showMore)
+    }
+
     return (
         <OfferItemContainer>
-            <JobTitleContainer>
-                <JobTitle>{title}</JobTitle>
-                <JobDate>{date}<CalendarMonthOutlinedIcon sx={{ color: "rgb(114, 177, 88)", marginLeft: "5px" }} fontSize="small" /></JobDate>
-            </JobTitleContainer>
-            <JobContent>
-                <JobDescription>
-                    {description}
-                </JobDescription>
-            </JobContent>
-            <JobFooter>
-                <JobCategoryIcon src={category.iconURL} /><JobCategory>{category.name}</JobCategory>
-            </JobFooter>
-
+            <OffersUpper>
+                <OffersTitle>{title}</OffersTitle>
+                <OffersDate><CalendarMonthIcon />{date}</OffersDate>
+            </OffersUpper>
+            <OffersContent>
+                {showMore ? <>
+                    <OffersDescription>{description.substring(0, description.length)}</OffersDescription>
+                    <OffersBox>
+                        <OffersDeadline>Deadline: {deadline}</OffersDeadline><OffersPrice>{price + "$"}</OffersPrice>
+                    </OffersBox>
+                </> :
+                    <OffersDescription>{description.substring(0, 151) + "..."}</OffersDescription>}
+            </OffersContent>
+            <OffersFooter>
+                <OffersCategory><OffersCategoryLogo src={category.iconURL} />{category.name}</OffersCategory>
+                {showMore ?
+                    <InfoButtons>
+                        <Button contact={true}>
+                            <HandshakeOutlinedIcon sx={{ marginRight: "5px" }} />
+                            Contact now
+                        </Button>
+                        <Button contact={false} onClick={showMoreHandler}>
+                            <ArrowCircleUpIcon sx={{ marginRight: "5px" }} />
+                            Hide info
+                        </Button>
+                    </InfoButtons>
+                    :
+                    <Button contact={false} onClick={showMoreHandler}>
+                        <ArrowCircleDownIcon sx={{ marginRight: "5px" }} />
+                        Show more info
+                    </Button>}
+            </OffersFooter>
         </OfferItemContainer>
     )
 }
