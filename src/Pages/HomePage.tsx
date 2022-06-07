@@ -1,7 +1,6 @@
 import Header from '../Components/UI/Header'
 import Hero from '../Components/MainPage/Hero'
 import HowItWorks from '../Components/MainPage/HowItWorks'
-
 import TypeChoice from '../Components/MainPage/TypeChoice'
 import Categories from '../Components/MainPage/Categories'
 import AboutFreelancing from '../Components/MainPage/AboutFreelancing'

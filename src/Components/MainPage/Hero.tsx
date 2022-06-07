@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { mobile, smallmobile } from '../../Assets/responsive';
 import { Link } from 'react-router-dom';
-import heroImage from "../../Assets/HomePageFiles/hero_img.png"
+import heroImage from "../../Assets/ProjectImages/hero_img.png"
 import MiscellaneousServicesIcon from '@mui/icons-material/MiscellaneousServices';
 
 const Container = styled.div`
@@ -100,7 +100,7 @@ const Slider = () => {
             Securely send files with work<br />
             and settle orders on an invoice
           </DescFull>
-          <Link to="/shop">
+          <Link to="/freelancer">
             <Button>
               <MiscellaneousServicesIcon sx={{ marginRight: "5px" }} />
               Find a job now</Button>

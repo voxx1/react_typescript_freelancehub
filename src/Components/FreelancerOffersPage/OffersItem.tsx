@@ -30,8 +30,10 @@ const OfferItemContainer = styled.div`
 display: flex;
 align-items: flex-start;
 flex-direction: column;
+width: 730px;
+margin: 0 auto;
 padding: 30px 0px 30px 125px;
-${tablet({ paddingLeft: "0px" })}
+${tablet({ paddingLeft: "0px", width: "100%" })}
 `;
 
 const OffersUpper = styled.div`

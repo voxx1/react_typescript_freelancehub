@@ -1,17 +1,17 @@
 import Header from '../Components/UI/Header'
 import Footer from '../Components/UI/Footer'
-import OffersList from '../Components/FreelancerOffersPage/OffersList'
+import NewOrder from '../Components/EmployersPageOffers/NewOrder'
 
 
 
-const FreelancerOffersList = () => {
+const EmployerPage = () => {
     return (
         <>
             <Header />
-            <OffersList />
+            <NewOrder />
             <Footer />
         </>
     )
 }
 
-export default FreelancerOffersList
+export default EmployerPage

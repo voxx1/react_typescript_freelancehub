@@ -1,8 +1,8 @@
 import styled from "styled-components";
 import { mobile, tablet } from "../../Assets/responsive"
-import boon1 from "../../Assets/HomePageFiles/boon-1.png"
-import boon2 from "../../Assets/HomePageFiles/boon-2.png"
-import boon3 from "../../Assets/HomePageFiles/boon-3.png"
+import boon1 from "../../Assets/ProjectImages/boon-1.png"
+import boon2 from "../../Assets/ProjectImages/boon-2.png"
+import boon3 from "../../Assets/ProjectImages/boon-3.png"
 
 
 

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { mobile, tablet } from "../../Assets/responsive"
-import left from "../../Assets/HomePageFiles/use-left.png"
-import right from "../../Assets/HomePageFiles/use-right.png"
+import left from "../../Assets/ProjectImages/use-left.png"
+import right from "../../Assets/ProjectImages/use-right.png"
 import { Link } from "react-router-dom";
 
 
@@ -108,7 +108,9 @@ const TypeChoice = () => {
             <ItemListItem>Send an online contract proposal and wait for customer acceptance. </ItemListItem>
             <ItemListItem>Pick up your net salary when the client accepts the job.</ItemListItem>
           </ItemList>
-          <Button style={{ background: "#306ACF" }}>Add a new order</Button>
+          <Link to="/employer">
+            <Button style={{ background: "#306ACF" }}>Add a new order</Button>
+          </Link>
         </Item>
       </ItemsWrapper>
     </Container>

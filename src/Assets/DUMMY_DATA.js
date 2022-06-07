@@ -5,7 +5,7 @@ export const DUMMY_CATEGORIES = [
     { name: "Art", url: "https://cdn-icons-png.flaticon.com/512/1496/1496034.png" },
     { name: "Handmade", url: "https://cdn-icons-png.flaticon.com/512/2917/2917682.png" },
     { name: "Office Work", url: "https://cdn-icons-png.flaticon.com/512/1584/1584911.png" },
-    { name: "Copywritting", url: "https://cdn-icons-png.flaticon.com/512/3379/3379594.png" }
+    { name: "Copywritting", url: "https://cdn-icons-png.flaticon.com/512/3379/3379594.png" },
 ]
 export const DUMMY_OFFERS = [
     {
@@ -50,6 +50,24 @@ export const DUMMY_OFFERS = [
         title: "Analysis of the company's entry into foreign markets",
         description: "I will commission the preparation of the Internationalization Business Model for entering 3 foreign markets - a specialized document analyzing the enterprise, defining its potential to enter foreign markets. Analysis based on the Template.",
         category: { name: "Copywritting", url: "https://cdn-icons-png.flaticon.com/512/3379/3379594.png" },
+        price: 150,
+        date: "27.09.2022"
+    },
+    {
+        id: 6,
+        deadline: "12 days",
+        title: "Analysis of the company's entry into foreign markets",
+        description: "I will commission the preparation of the Internationalization Business Model for entering 3 foreign markets - a specialized document analyzing the enterprise, defining its potential to enter foreign markets. Analysis based on the Template.",
+        category: { name: "Handmade", url: "https://cdn-icons-png.flaticon.com/512/2917/2917682.png" },
+        price: 150,
+        date: "27.09.2022"
+    },
+    {
+        id: 7,
+        deadline: "31 days",
+        title: "Analysis of the company's entry into foreign markets",
+        description: "I will commission the preparation of the Internationalization Business Model for entering 3 foreign markets - a specialized document analyzing the enterprise, defining its potential to enter foreign markets. Analysis based on the Template.",
+        category: { name: "Art", url: "https://cdn-icons-png.flaticon.com/512/1496/1496034.png" },
         price: 150,
         date: "27.09.2022"
     }]

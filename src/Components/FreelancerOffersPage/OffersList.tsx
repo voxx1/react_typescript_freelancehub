@@ -1,7 +1,8 @@
 import styled from "styled-components";
+import { useState } from "react";
 import { mobile, tablet } from '../../Assets/responsive';
 import { DUMMY_OFFERS, DUMMY_CATEGORIES } from "../../Assets/DUMMY_DATA"
-import headerImage from "../../Assets/HomePageFiles/header.png"
+import headerImage from "../../Assets/ProjectImages/freelancer-header.png"
 import OffersItem from "./OffersItem"
 
 
@@ -32,6 +33,8 @@ margin-top: 0px;
 const CategoryItem = styled.div`
 display: flex;
 align-items: center;
+cursor: pointer;
+
 `;
 
 const CategoryTitle = styled.h4`
@@ -42,6 +45,7 @@ height: 35px;
 width: 35px;
 margin-right: 10px;
 `;
+
 const OffersContainer = styled.div`
 
 `;
@@ -80,12 +84,21 @@ ${mobile({ display: "none" })}
 
 const OffersList = () => {
 
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null)
+
+  let clickedCategory = DUMMY_OFFERS
+  if (selectedCategory != null) {
+    clickedCategory = DUMMY_OFFERS.filter(item => item.category.name === selectedCategory)
+  }
+
+
+
   return (
     <Container>
       <HeaderContainer>
         <InfoContainer>
           <InfoTitle>Find a new order</InfoTitle><InfoNumber> 5552 orders waiting</InfoNumber>
-          <InfoDesc>More than 123 freelancers already!</InfoDesc>
+          <InfoDesc>Click on category to filter by it's name!</InfoDesc>
         </InfoContainer>
         <ImageContainer>
           <Image src={headerImage} />
@@ -95,12 +108,15 @@ const OffersList = () => {
         <CategoryContainer>
           <CategoryMainTitle>Categories</CategoryMainTitle>
           {DUMMY_CATEGORIES.map(item =>
-            <CategoryItem key={item.name}>
-              <CategoryLogo src={item.url} /><CategoryTitle>{item.name}</CategoryTitle>
+            <CategoryItem onClick={() => setSelectedCategory(item.name)} key={item.name}>
+              <CategoryLogo src={item.url} /><CategoryTitle style={{ color: selectedCategory === item.name ? "#72B158" : "black" }}>{item.name}</CategoryTitle>
             </CategoryItem>)}
+          <CategoryItem onClick={() => setSelectedCategory(null)}>
+            <CategoryLogo src="https://cdn-icons-png.flaticon.com/512/709/709606.png" /><CategoryTitle>Back to all</CategoryTitle>
+          </CategoryItem>
         </CategoryContainer>
         <OffersContainer>
-          {DUMMY_OFFERS.map(item =>
+          {clickedCategory.map(item =>
             <OffersItem key={item.id} deadline={item.deadline} title={item.title} description={item.description} date={item.date} id={item.id} price={item.price} category={{
               name: item.category.name,
               iconURL: item.category.url

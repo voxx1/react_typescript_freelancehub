@@ -48,11 +48,7 @@ const Right = styled.div`
 `;
 
 const MenuItem = styled(Link)`
-<<<<<<< HEAD
-  font-size: 16px;
-=======
   font-size: 18px;
->>>>>>> 57053bdeb6ec701837f685a993d7b0e2a783f243
   cursor: pointer;
   color: black;
   font-weight: bold;

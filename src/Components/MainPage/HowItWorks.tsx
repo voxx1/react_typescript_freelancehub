@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import { mobile, smallmobile, tablet } from "../../Assets/responsive"
-import step1 from "../../Assets/HomePageFiles/step-1.png"
-import step2 from "../../Assets/HomePageFiles/step-2.png"
-import step3 from "../../Assets/HomePageFiles/step-3.png"
-import step4 from "../../Assets/HomePageFiles/step-4.png"
+import step1 from "../../Assets/ProjectImages/step-1.png"
+import step2 from "../../Assets/ProjectImages/step-2.png"
+import step3 from "../../Assets/ProjectImages/step-3.png"
+import step4 from "../../Assets/ProjectImages/step-4.png"
 
 
 const Container = styled.div`
