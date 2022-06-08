@@ -51,6 +51,7 @@ justify-content: space-between;
 `;
 const OffersTitle = styled.h4`
 margin-top: 5px;
+word-break: break-all;
 `;
 const OffersDate = styled.h4`
 margin-top: 5px;
@@ -74,6 +75,7 @@ margin-right: 10px;
 `;
 const OffersDescription = styled.p`
 width: 701px;
+word-break: break-all;
 margin-top: 0px;
 ${tablet({ width: "100%" })}
 `;

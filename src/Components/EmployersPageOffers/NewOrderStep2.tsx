@@ -1,13 +1,12 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { mobile, tablet } from '../../Assets/responsive';
-import { DUMMY_CATEGORIES } from "../../Assets/DUMMY_DATA"
 import headerImage from "../../Assets/ProjectImages/new-order-header.png"
 import StepsComponent from "./StepsComponent";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { updateCategory } from "../../Assets/newOfferSlice"
+import { updateTitle, updateDescription } from "../../Assets/newOfferSlice"
 import { RootState } from "../../Assets/store";
 import OffersItem from "../FreelancerOffersPage/OffersItem";
 
@@ -32,35 +31,18 @@ ${tablet({ flexDirection: "column", padding: "0px" })}
 `;
 const CategoryContainer = styled.div`
 padding: 10px 0 0 50px;
-margin-right: -252px;
-margin-bottom: 30px;
-${tablet({ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", marginBottom: "25px", padding: "0px", marginRight: "0px" })}
+margin-right: -132px;
+${tablet({ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", marginBottom: "0px", padding: "0px", marginRight: "0px" })}
 
 `;
-const CategoryMainTitle = styled.h2`
+const FormMainTitle = styled.h2`
 margin-top: 0px;
 width: 400px;
 
 color: #353b64;
 ${tablet({ textAlign: "center", margin: "15px 5px", fontSize: "1.1em", width: "100%" })}
-
-`;
-const CategoryItem = styled.div`
-display: flex;
-align-items: center;
-cursor: pointer;
-padding-left: 45px;
-${tablet({ padding: "0px" })}
-
 `;
 
-const CategoryTitle = styled.h4`
-`;
-const CategoryLogo = styled.img`
-height: 35px;
-width: 35px;
-margin-right: 10px;
-`;
 
 const OffersContainer = styled.div`
 padding: 0 30px;
@@ -114,18 +96,63 @@ const Button = styled.button`
   ${mobile({ margin: "20px auto" })}
 `;
 
+const FormContainer = styled.form`
+display: flex;
+flex-direction: column;
+justify-content: center;
+`
+const FormItem = styled.div`
+display: flex;
+flex-direction: column;
+padding: 5px 0;
+`
+const FormInput = styled.input`
+border: 1px solid #ccc;
+border-radius: 6px;
+font: inherit;
+max-width: 100%;
+padding: 0.5rem;
+width: 20rem;
+`
+const FormTextArea = styled.textarea`
+border: 1px solid #ccc;
+border-radius: 6px;
+font: inherit;
+max-width: 100%;
+padding: 0.5rem;
+width: 20rem;
+`
+const FormLabel = styled.label`
+color: #353b64;
+display: block;
+font-size: 1rem;
+font-weight: 700;
+margin-top: 0.5rem;
+margin-bottom: 0.5rem;
+`
+
 
 const NewOrder: React.FC = () => {
 
     const data = useSelector((state: RootState) => state)
     const dispatch = useDispatch()
     const sampleOffer = { ...data.newOffer }
-    const [selectedCategory, setSelectedCategory] = useState<string>(sampleOffer.category.name)
+    const [inputTitle, setInputTitle] = useState<string>(sampleOffer.title)
+    const [inputDescription, setInputDescription] = useState<string>(sampleOffer.description)
+
+
+    const titleHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setInputTitle(event.target.value)
+    }
+    const descriptionHandler = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setInputDescription(event.target.value)
+    }
 
 
     useEffect(() => {
-        dispatch(updateCategory(selectedCategory))
-    }, [selectedCategory, dispatch])
+        dispatch(updateTitle(inputTitle))
+        dispatch(updateDescription(inputDescription))
+    }, [inputTitle, inputDescription, dispatch])
 
 
     return (
@@ -133,7 +160,7 @@ const NewOrder: React.FC = () => {
             <HeaderContainer>
                 <InfoContainer>
                     <InfoTitle>Add a new order</InfoTitle>
-                    <StepsComponent step1={true} step2={false} step3={false} step4={false} />
+                    <StepsComponent step1={true} step2={true} step3={false} step4={false} />
                 </InfoContainer>
                 <ImageContainer>
                     <Image src={headerImage} />
@@ -141,16 +168,21 @@ const NewOrder: React.FC = () => {
             </HeaderContainer>
             <BodyContainer>
                 <CategoryContainer>
-                    <CategoryMainTitle>Choose a category of the work you want to outsource / preview below
-                    </CategoryMainTitle>
-                    {DUMMY_CATEGORIES.map(item =>
-                        <CategoryItem onClick={() => setSelectedCategory(item.name)} key={item.name}>
-                            <CategoryLogo src={item.url} /><CategoryTitle style={{ color: selectedCategory === item.name ? "#72B158" : "#353b64" }}>{item.name}</CategoryTitle>
-                        </CategoryItem>)}
-                    {selectedCategory !== "Category of your order" ? <Link to="/employer/step2">
+                    <FormMainTitle>Fill form with basic informations / preview below
+                    </FormMainTitle>
+                    <FormContainer>
+                        <FormItem>
+                            <FormLabel>Title of order</FormLabel>
+                            <FormInput onChange={titleHandler} />
+                        </FormItem>
+                        <FormItem>
+                            <FormLabel>Descrption of order</FormLabel>
+                            <FormTextArea onChange={descriptionHandler} />
+                        </FormItem>
+                    </FormContainer>
+                    <Link to="/employer/step3">
                         <Button>Next step<ArrowForwardIcon sx={{ marginRight: "5px" }} /></Button>
-                    </Link> : null}
-
+                    </Link>
                 </CategoryContainer>
                 <OffersContainer>
                     <OffersItem key={sampleOffer.id} deadline={sampleOffer.deadline} title={sampleOffer.title} description={sampleOffer.description} date={sampleOffer.date} id={sampleOffer.id} price={sampleOffer.price} category={{

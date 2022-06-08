@@ -70,7 +70,7 @@ const Navbar = () => {
   const isSticky = () => {
     const header = document.querySelector('.header');
     const scrollTop = window.scrollY;
-    scrollTop >= 30 ? header!.classList.add('is-sticky') : header!.classList.remove('is-sticky');
+    scrollTop >= 40 ? header!.classList.add('is-sticky') : header!.classList.remove('is-sticky');
   };
 
   return (
