@@ -38,7 +38,6 @@ ${tablet({ display: "flex", justifyContent: "center", flexDirection: "column", a
 const FormMainTitle = styled.h2`
 margin-top: 0px;
 width: 400px;
-
 color: #353b64;
 ${tablet({ textAlign: "center", margin: "15px 5px", fontSize: "1.1em", width: "100%" })}
 `;
@@ -46,6 +45,8 @@ ${tablet({ textAlign: "center", margin: "15px 5px", fontSize: "1.1em", width: "1
 
 const OffersContainer = styled.div`
 padding: 0 30px;
+${tablet({ width: "90%" })}
+
 `;
 const HeaderContainer = styled.div`
 display: flex;
@@ -100,6 +101,7 @@ const FormContainer = styled.form`
 display: flex;
 flex-direction: column;
 justify-content: center;
+margin-bottom: 20px;
 `
 const FormItem = styled.div`
 display: flex;
@@ -180,9 +182,10 @@ const NewOrderStep2: React.FC = () => {
                             <FormTextArea onChange={descriptionHandler} />
                         </FormItem>
                     </FormContainer>
-                    <Link to="/employer/step3">
+                    {(inputTitle !== "Title of your order" && inputDescription.startsWith("Here") === false) ? <Link to="/employer/step3">
                         <Button>Next step<ArrowForwardIcon sx={{ marginRight: "5px" }} /></Button>
-                    </Link>
+                    </Link> : null}
+
                 </CategoryContainer>
                 <OffersContainer>
                     <OffersItem key={sampleOffer.id} deadline={sampleOffer.deadline} title={sampleOffer.title} expanded={false} description={sampleOffer.description} date={sampleOffer.date} id={sampleOffer.id} price={sampleOffer.price} category={{

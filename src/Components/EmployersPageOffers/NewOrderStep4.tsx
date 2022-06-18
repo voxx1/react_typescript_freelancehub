@@ -1,15 +1,17 @@
 import styled from "styled-components";
-import { useEffect, useState } from "react";
 import { mobile, tablet } from '../../Assets/responsive';
 import headerImage from "../../Assets/ProjectImages/new-order-header.png"
 import StepsComponent from "./StepsComponent";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux'
-import { updatePrice, updateDeadline } from "../../Assets/newOfferSlice"
+import { useSelector } from 'react-redux'
 import { RootState } from "../../Assets/store";
 import OffersItem from "../FreelancerOffersPage/OffersItem";
 
+
+interface ButtonProps {
+    startOver: boolean;
+}
 
 const Container = styled.div`
   display: block;
@@ -38,15 +40,22 @@ ${tablet({ display: "flex", justifyContent: "center", flexDirection: "column", a
 const FormMainTitle = styled.h2`
 margin-top: 0px;
 width: 400px;
-
 color: #353b64;
 ${tablet({ textAlign: "center", margin: "15px 5px", fontSize: "1.1em", width: "100%" })}
 `;
+
+const FormText = styled.p`
+width: 400px;
+text-align: left;
+${tablet({ width: "90%", textAlign: "center" })}
+
+`
 
 
 const OffersContainer = styled.div`
 padding: 0 30px;
 ${tablet({ width: "90%" })}
+
 `;
 const HeaderContainer = styled.div`
 display: flex;
@@ -77,10 +86,10 @@ ${mobile({ display: "none" })}
 `;
 
 const Button = styled.button`
-  padding: 11px 25px 11px 25px;
-  font-size: 20px;
-  margin: 20px 0 50px 0;
-  background: #72B158;
+padding: 11px 25px 11px 25px;
+font-size: 20px;
+margin: 0px 0 25px 0;
+  background: ${(props: ButtonProps) => (props.startOver ? "rgb(48, 106, 207)" : "#72B158")};
   border-radius: 10px;
   border: 2px solid white;
   cursor: pointer;
@@ -88,76 +97,36 @@ const Button = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  text-decoration: underline #72B158;
+  text-decoration: ${(props: ButtonProps) => (props.startOver ? "underline rgb(48, 106, 207)" : "underline #72B158")};
   &:hover {
-    color: #72B158;
+    color: ${(props: ButtonProps) => (props.startOver ? "rgb(48, 106, 207)" : "#72B158")};
     background: white;
-    border: 2px solid #72B158;
+    border: ${(props: ButtonProps) => (props.startOver ? "2px solid rgb(48, 106, 207)" : "2px solid #72B158")};
   }
   ${mobile({ margin: "20px auto" })}
 `;
 
-const FormContainer = styled.form`
-display: flex;
-flex-direction: column;
-justify-content: center;
-margin-bottom: 20px;
-
-`
-const FormItem = styled.div`
-display: flex;
-flex-direction: column;
-padding: 5px 0;
-`
-const FormInput = styled.input`
-border: 1px solid #ccc;
-border-radius: 6px;
-font: inherit;
-max-width: 100%;
-padding: 0.5rem;
-word-break: break-all;
-width: 20rem;
-`
-
-const FormLabel = styled.label`
-color: #353b64;
-display: block;
-font-size: 1rem;
-font-weight: 700;
-margin-top: 0.5rem;
-margin-bottom: 0.5rem;
-`
 
 
-const NewOrderStep3: React.FC = () => {
+const NewOrderStep4: React.FC = () => {
 
     const data = useSelector((state: RootState) => state)
-    const dispatch = useDispatch()
     const sampleOffer = { ...data.newOffer }
-    const [inputPrice, setInputPrice] = useState<string>(sampleOffer.price)
-    const [inputDeadline, setInputDeadline] = useState<string>(sampleOffer.deadline)
 
-
-    const priceHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputPrice(event.target.value)
-    }
-    const deadlineHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputDeadline(event.target.value)
+    const restartHandler = () => {
+        window.location.href = "/employer/step1"
     }
 
-
-    useEffect(() => {
-        dispatch(updatePrice(inputPrice))
-        dispatch(updateDeadline(inputDeadline))
-    }, [inputPrice, inputDeadline, dispatch])
-
+    const getResults = () => {
+        console.log(sampleOffer)
+    }
 
     return (
         <Container>
             <HeaderContainer>
                 <InfoContainer>
                     <InfoTitle>Add a new order</InfoTitle>
-                    <StepsComponent step1={true} step2={true} step3={true} step4={false} />
+                    <StepsComponent step1={true} step2={true} step3={true} step4={true} />
                 </InfoContainer>
                 <ImageContainer>
                     <Image src={headerImage} />
@@ -165,21 +134,13 @@ const NewOrderStep3: React.FC = () => {
             </HeaderContainer>
             <BodyContainer>
                 <CategoryContainer>
-                    <FormMainTitle>Fill form with basic informations / preview below
+                    <FormMainTitle>On the right you can see a preview of your order
                     </FormMainTitle>
-                    <FormContainer>
-                        <FormItem>
-                            <FormLabel>Deadline of order eg. 1 week</FormLabel>
-                            <FormInput onChange={deadlineHandler} />
-                        </FormItem>
-                        <FormItem>
-                            <FormLabel>Your budget in $</FormLabel>
-                            <FormInput type="number" min="1" max="9999" onChange={priceHandler} />
-                        </FormItem>
-                    </FormContainer>
-                    {(inputDeadline !== "Your deadline time" && inputPrice !== "0") ? <Link to="/employer/step4">
-                        <Button>Next step<ArrowForwardIcon sx={{ marginRight: "5px" }} /></Button>
-                    </Link> : null}
+                    <FormText>If everything is correct press the button below to add new order, in other case you can start over.</FormText>
+                    <Link to="/employer/step4">
+                        <Button onClick={getResults} startOver={false}>Add my order!<ArrowForwardIcon sx={{ marginRight: "5px" }} /></Button>
+                    </Link>
+                    <Button onClick={restartHandler} startOver={true}>Start again<ArrowForwardIcon sx={{ marginRight: "5px" }} /></Button>
                 </CategoryContainer>
                 <OffersContainer>
                     <OffersItem key={sampleOffer.id} deadline={sampleOffer.deadline} title={sampleOffer.title} expanded={true} description={sampleOffer.description} date={sampleOffer.date} id={sampleOffer.id} price={sampleOffer.price} category={{
@@ -192,4 +153,4 @@ const NewOrderStep3: React.FC = () => {
     )
 }
 
-export default NewOrderStep3
+export default NewOrderStep4

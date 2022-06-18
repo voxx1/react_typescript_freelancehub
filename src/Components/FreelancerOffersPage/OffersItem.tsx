@@ -43,6 +43,7 @@ justify-content: space-between;
 width: 100%;
 `;
 const OffersContent = styled.div`
+${tablet({ width: "100%" })}
 
 `;
 const OffersFooter = styled.div`
@@ -67,6 +68,7 @@ margin-top: 5px;
 font-size: 17px;
 display: flex;
 align-items: center;
+${tablet({ marginTop: "0px", marginBottom: "0px" })}
 ${mobile({ fontSize: "14px" })}
 `;
 const OffersCategoryLogo = styled.img`
@@ -84,11 +86,13 @@ const OffersDeadline = styled.h4`
 color: rgb(48, 106, 207);
 font-size: 17px;
 font-weight: bold;
+word-break: break-all;
 `
 const OffersPrice = styled.h4`
 color: rgb(48, 106, 207);
 font-size: 17px;
 font-weight: bold;
+word-break: break-all;
 `
 const OffersBox = styled.div`
 display: flex;

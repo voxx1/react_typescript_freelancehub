@@ -1,13 +1,13 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { mobile, tablet } from '../../Assets/responsive';
-import { DUMMY_CATEGORIES } from "../../Assets/DUMMY_DATA"
+import { DUMMY_CATEGORIES, DUMMY_OFFERS } from "../../Assets/DUMMY_DATA"
 import headerImage from "../../Assets/ProjectImages/new-order-header.png"
 import StepsComponent from "./StepsComponent";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
-import { updateCategory } from "../../Assets/newOfferSlice"
+import { updateCategory, updateIcon } from "../../Assets/newOfferSlice"
 import { RootState } from "../../Assets/store";
 import OffersItem from "../FreelancerOffersPage/OffersItem";
 
@@ -64,6 +64,7 @@ margin-right: 10px;
 
 const OffersContainer = styled.div`
 padding: 0 30px;
+${tablet({ width: "90%" })}
 `;
 const HeaderContainer = styled.div`
 display: flex;
@@ -121,11 +122,20 @@ const NewOrder: React.FC = () => {
     const dispatch = useDispatch()
     const sampleOffer = { ...data.newOffer }
     const [selectedCategory, setSelectedCategory] = useState<string>(sampleOffer.category.name)
+    const [categoryIcon, setCategoryIcon] = useState<string>(sampleOffer.category.iconURL)
 
+
+
+    const iconHandler = () => {
+        let result = DUMMY_OFFERS.filter(item => item.category.name === selectedCategory)
+        setCategoryIcon(result[0].category.url)
+    }
 
     useEffect(() => {
         dispatch(updateCategory(selectedCategory))
-    }, [selectedCategory, dispatch])
+        dispatch(updateIcon(categoryIcon))
+
+    }, [selectedCategory, categoryIcon, dispatch])
 
 
     return (
@@ -144,7 +154,7 @@ const NewOrder: React.FC = () => {
                     <CategoryMainTitle>Choose a category of the work you want to outsource / preview below
                     </CategoryMainTitle>
                     {DUMMY_CATEGORIES.map(item =>
-                        <CategoryItem onClick={() => setSelectedCategory(item.name)} key={item.name}>
+                        <CategoryItem onClick={() => { setSelectedCategory(item.name); iconHandler() }} key={item.name}>
                             <CategoryLogo src={item.url} /><CategoryTitle style={{ color: selectedCategory === item.name ? "#72B158" : "#353b64" }}>{item.name}</CategoryTitle>
                         </CategoryItem>)}
                     {selectedCategory !== "Category of your order" ? <Link to="/employer/step2">

@@ -4,6 +4,7 @@ import NewOrder from '../Components/EmployersPageOffers/NewOrder'
 import { useLocation } from "react-router-dom";
 import NewOrderStep2 from '../Components/EmployersPageOffers/NewOrderStep2'
 import NewOrderStep3 from '../Components/EmployersPageOffers/NewOrderStep3';
+import NewOrderStep4 from '../Components/EmployersPageOffers/NewOrderStep4';
 
 
 
@@ -18,6 +19,8 @@ const EmployerPage = () => {
         currentOrderState = <NewOrderStep2 />
     } else if (location.pathname === `/employer/step3`) {
         currentOrderState = <NewOrderStep3 />
+    } else if (location.pathname === `/employer/step4`) {
+        currentOrderState = <NewOrderStep4 />
     }
 
     return (

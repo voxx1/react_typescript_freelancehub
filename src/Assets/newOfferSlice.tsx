@@ -46,6 +46,9 @@ export const newOfferSlice = createSlice({
         updateCategory: (state, action: PayloadAction<string>) => {
             state.category.name = action.payload
         },
+        updateIcon: (state, action: PayloadAction<string>) => {
+            state.category.iconURL = action.payload
+        },
         updatePrice: (state, action: PayloadAction<string>) => {
             state.price = action.payload
         },
@@ -53,6 +56,6 @@ export const newOfferSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { updateTitle, updateDeadline, updateDescription, updateCategory, updatePrice } = newOfferSlice.actions
+export const { updateTitle, updateDeadline, updateDescription, updateCategory, updatePrice, updateIcon } = newOfferSlice.actions
 
 export default newOfferSlice.reducer
