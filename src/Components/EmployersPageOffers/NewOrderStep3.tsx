@@ -130,12 +130,12 @@ const NewOrderStep3: React.FC = () => {
     const data = useSelector((state: RootState) => state)
     const dispatch = useDispatch()
     const sampleOffer = { ...data.newOffer }
-    const [inputPrice, setInputPrice] = useState<number>(sampleOffer.price)
+    const [inputPrice, setInputPrice] = useState<string>(sampleOffer.price)
     const [inputDeadline, setInputDeadline] = useState<string>(sampleOffer.deadline)
 
 
     const priceHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
-        setInputPrice(5)
+        setInputPrice(event.target.value)
     }
     const deadlineHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
         setInputDeadline(event.target.value)
@@ -170,7 +170,7 @@ const NewOrderStep3: React.FC = () => {
                         </FormItem>
                         <FormItem>
                             <FormLabel>Your budget in $</FormLabel>
-                            <FormInput onChange={priceHandler} />
+                            <FormInput type="number" min="1" max="9999" onChange={priceHandler} />
                         </FormItem>
                     </FormContainer>
                     <Link to="/employer/step4">

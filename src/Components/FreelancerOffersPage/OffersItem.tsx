@@ -13,7 +13,7 @@ interface Props {
     description: string,
     deadline: string,
     date: string,
-    price: number,
+    price: string,
     id: number,
     category: {
         name: string,
@@ -75,7 +75,7 @@ width: 25px;
 margin-right: 10px;
 `;
 const OffersDescription = styled.p`
-width: 701px;
+width: 729px;
 word-break: break-all;
 margin-top: 0px;
 ${tablet({ width: "100%" })}
@@ -127,7 +127,6 @@ const OffersItem: React.FC<Props> = ({ title, description, date, price, deadline
 
     const showMoreHandler = (event: React.MouseEvent<HTMLElement>) => {
         setShowMore(!showMore)
-        console.log(showMore)
     }
 
     return (
@@ -140,7 +139,7 @@ const OffersItem: React.FC<Props> = ({ title, description, date, price, deadline
                 {showMore ? <>
                     <OffersDescription>{description.substring(0, description.length)}</OffersDescription>
                     <OffersBox>
-                        <OffersDeadline>Deadline: {deadline}</OffersDeadline><OffersPrice>{price + "$"}</OffersPrice>
+                        <OffersDeadline>Deadline: {deadline}</OffersDeadline><OffersPrice>{Number(price) + "$"}</OffersPrice>
                     </OffersBox>
                 </> :
                     <OffersDescription>{description.substring(0, 151) + "..."}</OffersDescription>}

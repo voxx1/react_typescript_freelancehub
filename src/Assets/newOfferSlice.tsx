@@ -10,7 +10,7 @@ const initialState: Order = {
         name: "Category of your order",
         iconURL: "https://cdn-icons-png.flaticon.com/512/1420/1420979.png"
     },
-    price: 0,
+    price: "0",
     date: new Date().toLocaleDateString()
 }
 
@@ -20,7 +20,7 @@ export interface Order {
     description: string,
     deadline: string,
     date: string,
-    price: number,
+    price: string,
     id: number,
     category: {
         name: string,
@@ -46,7 +46,7 @@ export const newOfferSlice = createSlice({
         updateCategory: (state, action: PayloadAction<string>) => {
             state.category.name = action.payload
         },
-        updatePrice: (state, action: PayloadAction<number>) => {
+        updatePrice: (state, action: PayloadAction<string>) => {
             state.price = action.payload
         },
     },

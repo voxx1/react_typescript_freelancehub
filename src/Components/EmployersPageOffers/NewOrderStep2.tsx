@@ -173,7 +173,7 @@ const NewOrderStep2: React.FC = () => {
                     <FormContainer>
                         <FormItem>
                             <FormLabel>Title of order</FormLabel>
-                            <FormInput onChange={titleHandler} />
+                            <FormInput type="text" onChange={titleHandler} />
                         </FormItem>
                         <FormItem>
                             <FormLabel>Descrption of order</FormLabel>
