@@ -132,7 +132,7 @@ margin-bottom: 0.5rem;
 `
 
 
-const NewOrder: React.FC = () => {
+const NewOrderStep2: React.FC = () => {
 
     const data = useSelector((state: RootState) => state)
     const dispatch = useDispatch()
@@ -185,7 +185,7 @@ const NewOrder: React.FC = () => {
                     </Link>
                 </CategoryContainer>
                 <OffersContainer>
-                    <OffersItem key={sampleOffer.id} deadline={sampleOffer.deadline} title={sampleOffer.title} description={sampleOffer.description} date={sampleOffer.date} id={sampleOffer.id} price={sampleOffer.price} category={{
+                    <OffersItem key={sampleOffer.id} deadline={sampleOffer.deadline} title={sampleOffer.title} expanded={false} description={sampleOffer.description} date={sampleOffer.date} id={sampleOffer.id} price={sampleOffer.price} category={{
                         name: sampleOffer.category.name,
                         iconURL: sampleOffer.category.iconURL
                     }} />
@@ -195,4 +195,4 @@ const NewOrder: React.FC = () => {
     )
 }
 
-export default NewOrder
+export default NewOrderStep2

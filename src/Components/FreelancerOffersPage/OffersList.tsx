@@ -117,7 +117,7 @@ const OffersList = () => {
         </CategoryContainer>
         <OffersContainer>
           {clickedCategory.map(item =>
-            <OffersItem key={item.id} deadline={item.deadline} title={item.title} description={item.description} date={item.date} id={item.id} price={item.price} category={{
+            <OffersItem key={item.id} expanded={false} deadline={item.deadline} title={item.title} description={item.description} date={item.date} id={item.id} price={item.price} category={{
               name: item.category.name,
               iconURL: item.category.url
             }} />)}

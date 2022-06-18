@@ -17,8 +17,9 @@ interface Props {
     id: number,
     category: {
         name: string,
-        iconURL: string
-    }
+        iconURL: string,
+    },
+    expanded: boolean
 }
 
 interface ButtonProps {
@@ -119,9 +120,10 @@ ${mobile({ flexDirection: "column" })}
 `
 
 
-const OffersItem: React.FC<Props> = ({ title, description, date, price, deadline, id, category }) => {
+const OffersItem: React.FC<Props> = ({ title, description, date, price, deadline, id, category, expanded }) => {
 
-    const [showMore, setShowMore] = useState<boolean>(false)
+
+    const [showMore, setShowMore] = useState<boolean>(expanded)
 
     const showMoreHandler = (event: React.MouseEvent<HTMLElement>) => {
         setShowMore(!showMore)
